@@ -1,0 +1,54 @@
+# Python virtual environment
+venv/
+env/
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Environment variables and config files
+*.env
+.env*
+.vscode/
+.idea/
+*.swp
+.DS_Store
+
+# Database files
+db.sqlite3
+*.sqlite3
+
+# Compiled translation files
+*.mo
+
+# Coverage reports
+htmlcov/
+.coverage
+.coverage.*
+.cache
+nosetests.xml
+coverage.xml
+*.cover
+*.log
+
+# Testing outputs
+.tox/
+.pytest_cache/
+junit.xml
+
+# pip and virtualenv files
+pip-log.txt
+pip-delete-this-directory.txt
+
+# Node.js (if using with Django)
+node_modules/
+npm-debug.log
+yarn-error.log
+
+# Vocode specific files
+vocode/
+logs/
+
+###
+models.dot
+api.http
