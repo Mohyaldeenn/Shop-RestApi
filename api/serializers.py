@@ -23,9 +23,9 @@ class OrderItemSerializer(serializers.ModelSerializer) :
         
 
 class OrderSerializer(serializers.ModelSerializer) :
+    order_id = serializers.UUIDField(read_only= True)
     items = OrderItemSerializer(many= True, read_only= True)
     total_price = serializers.SerializerMethodField()
-    user = serializers.StringRelatedField()
     def get_total_price(self, obj) :
         order_items = obj.items.all()
         return sum(order_item.item_subtotal for order_item in order_items)
@@ -33,8 +33,29 @@ class OrderSerializer(serializers.ModelSerializer) :
     class Meta :
         model = Order
         fields = ("order_id", "created_at", "user", "status", "items", "total_price",)
-        
 
+
+class OrderCreateSerializer(serializers.ModelSerializer) :
+    class OrderItemCreateSerializer(serializers.ModelSerializer) :
+        class Meta :
+            model = OrderItem
+            fields = ("product", "quantity")
+    
+    items = OrderItemCreateSerializer(many= True)
+    
+    def create(self, validated_data):
+        items_data = validated_data.pop("items")
+        order=  Order.objects.create(**validated_data)
+        for item in items_data :
+            OrderItem.objects.create(order= order, **item)
+        return order
+        
+    class Meta :
+        model = Order
+        fields = ("user", "status", "items")
+        extra_kwargs = {
+           "user" : {"read_only" : True} 
+        }
 class ProductInfoSerializer(serializers.Serializer) :
     products = ProductSerializer(many= True)
     count = serializers.IntegerField()

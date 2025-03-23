@@ -1,0 +1,78 @@
+
+GET http://127.0.0.1:8000/products/ HTTP/1.1
+
+###
+
+GET http://127.0.0.1:8000/products/1 HTTP/1.1
+
+###
+
+PUT  http://127.0.0.1:8000/products/1 HTTP/1.1
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzQyNTUwNTMyLCJpYXQiOjE3NDI1NTAyMzIsImp0aSI6ImMxNmExNmJlNTRlMTQ3ZjJhZjkxN2ZlNjk5MmI5NTc2IiwidXNlcl9pZCI6M30.KR61xvD4NZ_TVi7rGJaKPpuYy_yWoSv2uYIvjDHOoSk
+
+{
+    "name" : "new test",
+    "descriptions" : "test product from rest client with jwt" ,
+    "price" : 99 ,
+    "stock" : 4
+}
+
+###
+
+DELETE  http://127.0.0.1:8000/products/10 HTTP/1.1
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzQyNTY4MDIwLCJpYXQiOjE3NDI1Njc3MjAsImp0aSI6Ijk1N2VlYzI5OTEyYTQzZTY4ZDY5ZGE1MTU5ZDkzOTE5IiwidXNlcl9pZCI6MX0.-s4bLIOU5g2xtwemmbIUWZ9DRylqRqWtgd_2V3qK07k
+
+###
+
+POST http://127.0.0.1:8000/products/ HTTP/1.1
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzQyNTUwNTMyLCJpYXQiOjE3NDI1NTAyMzIsImp0aSI6ImMxNmExNmJlNTRlMTQ3ZjJhZjkxN2ZlNjk5MmI5NTc2IiwidXNlcl9pZCI6M30.KR61xvD4NZ_TVi7rGJaKPpuYy_yWoSv2uYIvjDHOoSk
+
+{
+    "name" : "test2",
+    "descriptions" : "test product from rest client with jwt" ,
+    "price" : 99 ,
+    "stock" : 4
+}
+
+###
+
+POST http://127.0.0.1:8000/api/token/ HTTP/1.1
+Content-Type: application/json
+
+{
+    "username" : "mohy",
+    "password" : "123" 
+    
+}
+
+###
+
+POST http://127.0.0.1:8000/api/token/refresh HTTP/1.1
+Content-Type: application/json
+
+{
+    "refresh" : "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoicmVmcmVzaCIsImV4cCI6MTc0MjYzNzc0NiwiaWF0IjoxNzQyNTUxMzQ2LCJqdGkiOiIxNDhkY2I2NGRjOTc0ZDA3ODg5MmUwMmZmYzA2MTU1ZSIsInVzZXJfaWQiOjN9.5NA_hwhSBd5STi4JQkPq67Xlc8dM5-EdNHkek4ps-Ds"
+}
+
+###
+
+GET http://127.0.0.1:8000/orders/ HTTP/1.1
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzQyNzIxMDYzLCJpYXQiOjE3NDI3MjA3NjMsImp0aSI6IjkzNzEyODZjNDQyZDQ3MjRhNDBlY2MwNzg3OWUwNzA1IiwidXNlcl9pZCI6MX0.vSpbUj0J5lHxc-wSFkM86FjKklNlE8wEzLyzC1_Dc4E
+
+###
+
+POST http://127.0.0.1:8000/orders/ HTTP/1.1
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzQyNzI0OTcwLCJpYXQiOjE3NDI3MjQ2NzAsImp0aSI6ImI5ZmFkM2E3ZDY1YjQ4YzE5YjU5MWIyYzUwZmMzMjZiIiwidXNlcl9pZCI6MX0.kje3rVUQqDiM08GBCVKGlLQjKjT3pl3WCD9EuzhWs5Y
+
+{
+      "status": "Pending",
+      "items": [
+        {
+          "product": 3,
+          "quantity": 3
+        }
+      ]
+}
