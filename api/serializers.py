@@ -1,3 +1,4 @@
+from django.db import transaction
 from rest_framework import serializers
 from .models import Order, OrderItem, Product
 
@@ -49,7 +50,16 @@ class OrderCreateSerializer(serializers.ModelSerializer) :
         for item in items_data :
             OrderItem.objects.create(order= order, **item)
         return order
-        
+    
+    def update(self, instance, validated_data):
+        item_data = validated_data.pop("items")
+        instance = super().update(instance, validated_data)
+        with transaction.atomic() :
+            if item_data is not None :
+                instance.items.all().delete() 
+                for item in item_data :
+                    OrderItem.objects.create(order = instance, **item)
+        return instance  
     class Meta :
         model = Order
         fields = ("user", "status", "items")

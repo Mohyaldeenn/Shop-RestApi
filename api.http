@@ -59,13 +59,17 @@ Content-Type: application/json
 ###
 
 GET http://127.0.0.1:8000/orders/ HTTP/1.1
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzQyNzIxMDYzLCJpYXQiOjE3NDI3MjA3NjMsImp0aSI6IjkzNzEyODZjNDQyZDQ3MjRhNDBlY2MwNzg3OWUwNzA1IiwidXNlcl9pZCI6MX0.vSpbUj0J5lHxc-wSFkM86FjKklNlE8wEzLyzC1_Dc4E
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzQyNzM4MjI2LCJpYXQiOjE3NDI3Mzc5MjYsImp0aSI6IjZkOGQ0MzM1YmMyZTQ4NWI4ZjdmZjY1YjczNGZiZDVhIiwidXNlcl9pZCI6MX0.EE0HYkoeeQi5Pfy4LYJrlwLdKXikUxaT0yJf3umg5C4
 
 ###
 
+GET  http://127.0.0.1:8000/orders/a5bb0a76-a794-4ef8-b650-0fde934d2d67 HTTP/1.1
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzQyNzM4NDY3LCJpYXQiOjE3NDI3MzgxNjcsImp0aSI6ImE4ZWExZTczYWU2ODQ1Yjg4MThiZmJmZWZhNDcwMjA0IiwidXNlcl9pZCI6MX0.skMmwQr5sihmccAZKw_SLa3tRCNIaF06YRDkTj6rjg4
+
+###
 POST http://127.0.0.1:8000/orders/ HTTP/1.1
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzQyNzI0OTcwLCJpYXQiOjE3NDI3MjQ2NzAsImp0aSI6ImI5ZmFkM2E3ZDY1YjQ4YzE5YjU5MWIyYzUwZmMzMjZiIiwidXNlcl9pZCI6MX0.kje3rVUQqDiM08GBCVKGlLQjKjT3pl3WCD9EuzhWs5Y
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzQyNzM4NTkzLCJpYXQiOjE3NDI3MzgyOTMsImp0aSI6IjJkMWM3OGNkMTFiZTQ3ZjE4MjQ3YzMyNjBlODQwMjVkIiwidXNlcl9pZCI6MX0.LERvcw_j4b6AqosiWflrbahGD1Cw1hEFhq85g2R1X_M
 
 {
       "status": "Pending",
@@ -76,3 +80,19 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiY
         }
       ]
 }
+
+###
+
+PUT http://127.0.0.1:8000/orders/a5bb0a76-a794-4ef8-b650-0fde934d2d67/ HTTP/1.1
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzQyNzM4OTUzLCJpYXQiOjE3NDI3Mzg2NTMsImp0aSI6IjY4YjY1N2RmMjA3YjQ4YjI5MjJmMTNiODM3NTQ2MzA2IiwidXNlcl9pZCI6MX0.SMcohUW-Nh0Y4u7jE9AmsirKx6KcKOVM0AZde5MWKGU
+
+{
+      "status": "Confirmed",
+      "items": [
+        {
+          "product": 3,
+          "quantity": 3
+        }
+      ]
+    }

@@ -1,4 +1,6 @@
 from django.db.models import Max
+from django.utils.decorators import method_decorator
+from django.views.decorators.cache import cache_page
 from rest_framework import generics
 from rest_framework.views import APIView
 from rest_framework import viewsets
@@ -27,7 +29,16 @@ class ProductCreateList(generics.ListCreateAPIView) :
     
     pagination_class = PageNumberPagination
     pagination_class.page_size = 6
-    pagination_class.max_page_size = 11
+    pagination_class.max_page_size = 11 
+    
+    @method_decorator(cache_page(60 * 15, key_prefix= "product_list"))
+    def list(self, request, *args, **kwargs):
+        return super().list(request, *args, **kwargs)
+    
+    def get_queryset(self):
+        import time
+        time.sleep(2)
+        return super().get_queryset()
     
     def get_permissions(self):
         self.permission_classes = [AllowAny]
@@ -47,7 +58,7 @@ class ProductDetail(generics.RetrieveUpdateDestroyAPIView) :
 
 
 class OrderViewSet(viewsets.ModelViewSet) :
-    queryset = Order.objects.all().prefetch_related("items__product")
+    queryset = Order.objects.all().prefetch_related("items__product").order_by("pk")
     serializer_class = OrderSerializer
     permission_classes = [IsAuthenticated]
     filterset_class = OrderFilter
@@ -60,7 +71,7 @@ class OrderViewSet(viewsets.ModelViewSet) :
         return qs
     
     def get_serializer_class(self):
-        if self.action == "create" :
+        if self.action == "create" or self.action == "update"  :
             return OrderCreateSerializer
         return super().get_serializer_class()
     
