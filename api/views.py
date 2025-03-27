@@ -1,6 +1,7 @@
 from django.db.models import Max
 from django.utils.decorators import method_decorator
 from django.views.decorators.cache import cache_page
+from django.views.decorators.vary import vary_on_headers
 from rest_framework import generics
 from rest_framework.views import APIView
 from rest_framework import viewsets
@@ -63,6 +64,11 @@ class OrderViewSet(viewsets.ModelViewSet) :
     permission_classes = [IsAuthenticated]
     filterset_class = OrderFilter
     filter_backends = [DjangoFilterBackend]
+    
+    @method_decorator(cache_page(60 * 15, key_prefix= "order_list"))
+    @method_decorator(vary_on_headers("Authorization"))
+    def list(self, request, *args, **kwargs):
+        return super().list(request, *args, **kwargs)
     
     def get_queryset(self):
         qs = self.queryset
